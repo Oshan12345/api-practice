@@ -1,4 +1,5 @@
 function getWeatherInfo() {
+  const imgIcon = document.getElementById("icon");
   const city = document.getElementById("city-name-input").value;
   const cityName = document.getElementById("city-name");
   const weatherCondition = document.getElementById("weather-condition");
@@ -15,6 +16,10 @@ function getWeatherInfo() {
       weatherCondition.innerText = data.weather[0].main;
       feltTemperature.innerText = data.main.feels_like;
       temperature.innerText = data.main.temp;
+      imgIcon.setAttribute(
+        "src",
+        `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`
+      );
     })
     .catch((err) => console.log(err));
 }
