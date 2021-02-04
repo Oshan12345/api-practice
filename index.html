@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+
+    <title>json</title>
+  </head>
+  <body>
+    <section class="container mt-5">
+      <ul id="ul-list"></ul>
+    </section>
+    <section class="container mt-4">
+      <div class="mb-3">
+        <label for="titleInput" class="form-label">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="titleInput"
+          placeholder="Give a title"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="text-body" class="form-label">Enter text</label>
+        <textarea class="form-control" id="text-body" rows="3"></textarea>
+      </div>
+      <button class="btn btn-info" onclick="submitData()">Submit</button>
+    </section>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      fetch("https://jsonplaceholder.typicode.com/users")
+        .then((response) => response.json())
+        .then((json) => users(json))
+        .catch((err) => console.log(err));
+
+      function users(user) {
+        const userName = user.map((user) => user.username);
+        console.log(userName);
+        userName.map((name) => {
+          const ul = document.getElementById("ul-list");
+          const li = document.createElement("li");
+          li.innerText = name;
+
+          ul.appendChild(li);
+        });
+
+        // for (let i = 0; i < userName.length; i++) {
+        //   const ul = document.getElementById("ul-list");
+        //   const li = document.createElement("li");
+        //   const element = userName[i];
+        //   li.innerText = element;
+        //   ul.appendChild(li);
+        // }
+      }
+
+      function submitData() {
+        const titleInput = document.getElementById("titleInput").value;
+        const textBody = document.getElementById("text-body").value;
+        postInformation = {
+          title: titleInput,
+          body: textBody,
+        };
+        postData(postInformation);
+      }
+
+      function postData(postInfo) {
+        fetch("https://jsonplaceholder.typicode.com/posts", {
+          method: "POST",
+          body: JSON.stringify(postInfo),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        })
+          .then((response) => response.json())
+          .then((json) => console.log(json));
+      }
+    </script>
+  </body>
+</html>
+
+<!-- https://jsonplaceholder.typicode.com/ -->
