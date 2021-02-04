@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+
+    <title>Api-fun-random-user</title>
+  </head>
+  <body>
+    <section class="container">
+      <div class="w-50 m-auto">
+        <h2 id="activity"></h2>
+        <a id="learn-more-link" target="_blank"> Learn more</a>
+      </div>
+    </section>
+    <section class="container">
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+          <div class="card">
+            <img class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text">
+                This is a longer card with supporting text below as a natural
+                lead-in to additional content. This content is a little bit
+                longer.
+              </p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Last updated 1 mins ago</small>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <img class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text">
+                This is a longer card with supporting text below as a natural
+                lead-in to additional content. This content is a little bit
+                longer.
+              </p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Last updated 1 mins ago</small>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <img class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text">
+                This is a longer card with supporting text below as a natural
+                lead-in to additional content.
+              </p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Last updated 1 mins ago</small>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <img class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text">
+                This is a longer card with supporting text below as a natural
+                lead-in to additional content. This content is a little bit
+                longer.
+              </p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Last updated 1 mins ago</small>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <img class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text">
+                This is a longer card with supporting text below as a natural
+                lead-in to additional content. This content is a little bit
+                longer.
+              </p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Last updated 1 mins ago</small>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <img class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text">
+                This is a longer card with supporting text below as a natural
+                lead-in to additional content. This content is a little bit
+                longer.
+              </p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Last updated 1 mins ago</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      function headingUpdate() {
+        fetch("http://www.boredapi.com/api/activity/")
+          .then((res) => res.json())
+          .then((data) => {
+            document.getElementById("activity").innerText = data.activity;
+            const linkUrl = document.getElementById("learn-more-link");
+            linkUrl.setAttribute("href", data.link);
+          });
+      }
+      setInterval(() => {
+        headingUpdate();
+      }, 5000);
+
+      //api for random user
+
+      setInterval(() => {
+        fetch("https://randomuser.me/api/?results=6")
+          .then((res) => res.json())
+          .then((data) => userData(data.results));
+      }, 6000);
+
+      function userData(userInfo) {
+        displayInformation("card-title", userInfo);
+        displayInformation("card-img-top", userInfo);
+      }
+
+      function displayInformation(className, userInfo) {
+        const user = document.getElementsByClassName(className);
+        for (let i = 0; i < user.length; i++) {
+          const singleUser = userInfo[i];
+          const element = user[i];
+
+          if (className == "card-img-top") {
+            element.setAttribute("src", `${singleUser.picture.large}`);
+          } else {
+            element.innerText = `${singleUser.name.title}  ${singleUser.name.first} ${singleUser.name.last}`;
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
+
+<!-- https://jsonplaceholder.typicode.com/ -->
+<!-- https://www.boredapi.com/documentation -->
