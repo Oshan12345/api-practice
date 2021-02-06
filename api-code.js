@@ -47,6 +47,7 @@ async function countryInfo(countryName) {
     `https://restcountries.eu/rest/v2/name/${countryName}?fullText=true`
   );
   const data = await response.json();
+  console.log(data);
   const { name, capital, subregion, flag } = data[0];
   const countryDetails = document.getElementById("country-details");
 
@@ -61,3 +62,17 @@ async function countryInfo(countryName) {
   //  return data;
   // return data can be used with line no 34
 }
+
+// finding specific country details from all country details... can be used further by making it dynamic
+// fetch(`https://restcountries.eu/rest/v2/all`)
+//   .then((response) => response.json())
+//   .then((data) => {
+//     console.log(data, typeof data);
+//     findElem(data);
+//   });
+
+// function findElem(params) {
+//   const result = params.find(({ name }) => name === "Bangladesh");
+
+//   console.log(result);
+// }
