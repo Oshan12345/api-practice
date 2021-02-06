@@ -44,16 +44,21 @@
           </div>
         </div>
       </form>
-      <div class="weather-status text-white text-center">
-        <img id="icon" alt="" />
-        <h1 id="city-name"></h1>
-        <h3>Temperature : <span id="temperature">0</span>&deg;C</h3>
-        <h3>Feel-like : <span id="felt-temperature">0</span>&deg;C</h3>
+      <div
+        class="weather-status text-white d-flex flex-column flex-md-row justify-content-center"
+      >
+        <div class="mx-5">
+          <img id="icon" alt="" />
+          <h1 id="city-name"></h1>
+          <h3>Temperature : <span id="temperature">0</span>&deg;C</h3>
+          <h3>Feel-like : <span id="felt-temperature">0</span>&deg;C</h3>
 
-        <h1 class="lead" id="weather-condition"></h1>
+          <h1 class="lead" id="weather-condition"></h1>
+        </div>
+
+        <div class="mx-5" id="country-details"></div>
       </div>
     </div>
-
     <script src="api-code.js"></script>
   </body>
 </html>
